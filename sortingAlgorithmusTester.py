@@ -133,35 +133,32 @@ class ShakerSort(Algorithm):
         super().__init__(name, dataSmall, dataMedium, dataBig)
 
     def sort(self, data, index):
-        def shaker_sort(data):
-            left = 0
-            right = len(data) - 1
-            swapped = True
+        left = 0
+        right = len(data) - 1
+        swapped = True
 
-            while swapped:
-                swapped = False
+        while swapped:
+            swapped = False
 
-                # von links nach rechts sortieren
-                for i in range(left, right):
-                    if data[i][index] > data[i + 1][index]:
-                        data[i], data[i + 1] = data[i + 1], data[i]
-                        swapped = True
+            # von links nach rechts sortieren
+            for i in range(left, right):
+                if data[i][index] > data[i + 1][index]:
+                    data[i], data[i + 1] = data[i + 1], data[i]
+                    swapped = True
 
-                if not swapped:
-                    break
+            if not swapped:
+                break
 
-                swapped = False
-                right -= 1
+            swapped = False
+            right -= 1
 
-                # von rechts nach links sortieren
-                for i in range(right, left, -1):
-                    if data[i][index] < data[i - 1][index]:
-                        data[i], data[i - 1] = data[i - 1], data[i]
-                        swapped = True
+            # von rechts nach links sortieren
+            for i in range(right, left, -1):
+                if data[i][index] < data[i - 1][index]:
+                    data[i], data[i - 1] = data[i - 1], data[i]
+                    swapped = True
 
-                left += 1
-
-        shaker_sort(data)
+            left += 1
 
 
 if __name__ == '__main__':
