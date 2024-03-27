@@ -190,13 +190,28 @@ if __name__ == '__main__':
             dataB.append(dataSet)
 
     heapsort = HeapSort("HeapSort", dataS, dataM, dataB)
-    heapsort.sortAll("prename")
+    # heapsort.sortAll("prename")
 
     shakersort = ShakerSort("ShakerSort", dataS, dataM, dataB)
-    shakersort.sortAll("prename")
+    # shakersort.sortAll("prename")
 
     quicksort = QuickSort("QuickSort", dataS, dataM, dataB)
-    quicksort.sortAll("prename")
+    # quicksort.sortAll("prename")
 
     bubblesort = BubbleSort("BubbleSort", dataS, dataM, dataB)
-    bubblesort.sortAll("prename")  # possibilities: id, prename, name, street, zip, birthdate, balance
+    # bubblesort.sortAll("prename")  # possibilities: id, prename, name, street, zip, birthdate, balance
+
+    heapsort.sortSmall("prename")
+    shakersort.sortSmall("prename")
+    quicksort.sortSmall("prename")
+    bubblesort.sortSmall("prename")
+
+    heapsort.sortMedium("prename")
+    shakersort.sortMedium("prename")
+    quicksort.sortMedium("prename")
+    bubblesort.sortMedium("prename")
+
+    heapsort.sortBig("prename")
+    shakersort.sortBig("prename")
+    quicksort.sortBig("prename")
+    bubblesort.sortBig("prename")
