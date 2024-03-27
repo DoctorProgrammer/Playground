@@ -14,8 +14,7 @@ def bruteforceString(endString):
                 break
             else:
                 output = output[:-1]
-
-            time.sleep(0.01)
+            # time.sleep(0.01)
 
 
 def clear():
