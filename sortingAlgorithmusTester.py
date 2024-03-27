@@ -22,7 +22,7 @@ class Algorithm:
         self.sort(self.dataSmall, index)
         end = datetime.now().strftime("%S.%f")
         time = float(end) - float(start)
-        print(self.name + " - small: " + str(time) + "s")
+        print(self.name + " - small: " + str(time) + "s" + "\t\t\t\t\t" + str(start) + " - " + str(end))
 
     def sortMedium(self, column):
         index = self.getColumnIndex(column)
@@ -30,7 +30,7 @@ class Algorithm:
         self.sort(self.dataMedium, index)
         end = datetime.now().strftime("%S.%f")
         time = float(end) - float(start)
-        print(self.name + " - medium: " + str(time) + "s")
+        print(self.name + " - medium: " + str(time) + "s" + "\t\t\t\t\t" + str(start) + " - " + str(end))
 
     def sortBig(self, column):
         index = self.getColumnIndex(column)
@@ -38,7 +38,7 @@ class Algorithm:
         self.sort(self.dataBig, index)
         end = datetime.now().strftime("%S.%f")
         time = float(end) - float(start)
-        print(self.name + " - big: " + str(time) + "s")
+        print(self.name + " - big: " + str(time) + "s" + "\t\t\t\t\t" + str(start) + " - " + str(end))
 
     @staticmethod
     def getColumnIndex(column):
@@ -189,29 +189,33 @@ if __name__ == '__main__':
             dataSet[-1] = dataSet[-1].replace("\n", "")
             dataB.append(dataSet)
 
+    sortingFor = "balance"  # possibilities: id, prename, name, street, zip, birthdate, balance
+
     heapsort = HeapSort("HeapSort", dataS, dataM, dataB)
-    # heapsort.sortAll("prename")
+    heapsort.sortAll(sortingFor)
 
     shakersort = ShakerSort("ShakerSort", dataS, dataM, dataB)
-    # shakersort.sortAll("prename")
+    shakersort.sortAll(sortingFor)
 
     quicksort = QuickSort("QuickSort", dataS, dataM, dataB)
-    # quicksort.sortAll("prename")
+    quicksort.sortAll(sortingFor)
 
     bubblesort = BubbleSort("BubbleSort", dataS, dataM, dataB)
-    # bubblesort.sortAll("prename")  # possibilities: id, prename, name, street, zip, birthdate, balance
+    bubblesort.sortAll(sortingFor)
 
-    heapsort.sortSmall("prename")
-    shakersort.sortSmall("prename")
-    quicksort.sortSmall("prename")
-    bubblesort.sortSmall("prename")
+    """
+    heapsort.sortSmall(sortingFor)
+    shakersort.sortSmall(sortingFor)
+    quicksort.sortSmall(sortingFor)
+    bubblesort.sortSmall(sortingFor)
 
-    heapsort.sortMedium("prename")
-    shakersort.sortMedium("prename")
-    quicksort.sortMedium("prename")
-    bubblesort.sortMedium("prename")
+    heapsort.sortMedium(sortingFor)
+    shakersort.sortMedium(sortingFor)
+    quicksort.sortMedium(sortingFor)
+    bubblesort.sortMedium(sortingFor)
 
-    heapsort.sortBig("prename")
-    shakersort.sortBig("prename")
-    quicksort.sortBig("prename")
-    bubblesort.sortBig("prename")
+    heapsort.sortBig(sortingFor)
+    shakersort.sortBig(sortingFor)
+    quicksort.sortBig(sortingFor)
+    bubblesort.sortBig(sortingFor)
+    """
