@@ -2,14 +2,14 @@ import pyautogui as pt
 import time
 
 
-def Type(text: str):
-    for i in text:
-        pt.keyDown(i)
-        pt.keyUp(i)
-
-
 if __name__ == '__main__':
+    # a programm that repeats following steps:
+    # 1. press F5
+    # 2. press ctrl + tab
+    # this should be repeated
     time.sleep(5)
-    Type("Hallo Welt Hallo Welt Hallo Welt Hallo Welt Hallo Welt Hallo Welt Hallo Welt Hallo Welt ")
-# Ein Programm, dass mir cmd öffnet und dann das Fenster von cmd dauerhaft an einen zufälligen Ort bewegt.
-
+    for i in range(100):
+        pt.press("F5")
+        pt.keyDown("ctrl")
+        pt.press("tab")
+        pt.keyUp("ctrl")
