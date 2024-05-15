@@ -4,66 +4,76 @@ import random
 class Pet:
     def __init__(self, name, animal):
         # attribute have to be set by setter
-        self._feed = 5
+        self._hunger: int = 5
         self._level = 0.0
         self._name = name
         self._type = animal
 
     def sleep(self):
-        self._feed -= 2
-        if self._feed < 0:
+        print(f"{self.name} is sleeping.")
+        self.hunger = self.hunger - 2
+        if self.hunger < 0:
             self.die()
             return 1
+        if self.hunger < 2:
+            print(f"{self.name} is hungry. ({self.hunger})")
         return 0
 
     def play(self):
-        self._feed -= 1
-        if self._feed < 0:
+        print(f"{self.name} is playing.")
+        self.hunger = self.hunger - 1
+        if self.hunger < 0:
             return self.die()
-        self._level += 0.1
+        self.level = self.level + 0.5
         return 0
 
     def hit(self):
-        self._level -= 0.5
-        if self._level < 0:
+        print(f"{self.name} is hit.")
+        self.level = self.level - 1.0
+        if self.level < 0:
             return self.flee()
         return 0
 
     def swim(self):
-        self._feed -= 0.5
+        print(f"{self.name} is swimming.")
+        self.hunger = self.hunger - 2
         chance = 1
-        if self._feed < 1:
+        if self.hunger < 1:
             chance = 5
 
         if random.randint(0, 1000) == chance:
             return self.drown()
-        if self._feed < 0:
+        if self.hunger < 0:
             return self.die()
         return 0
 
     def die(self):
-        print(f"{self._name} died.")
+        print(f"{self.name} died.")
         return 1
 
     def flee(self):
-        print(f"{self._name} fled.")
+        print(f"{self.name} fled.")
         return 2
 
     def drown(self):
-        print(f"{self._name} drowned.")
+        print(f"{self.name} drowned.")
         return 3
+
+    def feed(self, value):
+        self.hunger = self.hunger + value
+        print(f"{self.name} is eating.\nNew hunger: {self.hunger}")
 
     @property
     def name(self):
         return self._name
 
     @property
-    def feed(self):
-        return self._feed
+    def hunger(self):
+        return self._hunger
 
-    @feed.setter
-    def feed(self, value):
-        self._feed += value
+    @hunger.setter
+    def hunger(self, value):
+        self._hunger = value
 
     @property
     def type(self):
@@ -76,16 +86,13 @@ class Pet:
     @level.setter
     def level(self, value):
         self._level = value
+        self._level = round(self._level, 2)
 
     def __str__(self):
-        return f"Name: {self.name}\n" \
+        return f"\tName: {self.name}\n" \
             f"\tType: {self.type}\n" \
-            f"\tFeed: {self.feed}\n" \
+            f"\tFeed: {self.hunger}\n" \
             f"\tLevel: {self.level}\n"
-
-
-def feed(pet, food):
-    pet.feed = food
 
 
 def choose(list):
@@ -132,19 +139,22 @@ def pet_action(pet):
                   "\tstats\n"
                   "\texit\n")
         elif action == "sleep":
-            if pet.sleep():
-                return 0
+            if pet.sleep() != 0:
+                return 1
         elif action == "play":
-            if pet.play():
-                return 0
+            if pet.play() != 0:
+                return 1
         elif action == "hit":
-            if pet.hit():
-                return 0
+            if pet.hit() != 0:
+                return 1
         elif action == "swim":
-            if pet.swim():
-                return 0
+            if pet.swim() != 0:
+                return 1
         elif action == "feed":
-            feed(pet, int(input("Enter the amount of food: ")))
+            try:
+                pet.feed(int(input("Enter the amount of food: ")))
+            except ValueError:
+                print("Invalid input.")
         elif action == "stats":
             print(pet)
         elif action == "exit":
@@ -165,16 +175,19 @@ def start(list):
         elif action == "choose":
             pet = choose(list)
             if pet:
-                if pet_action(pet):
+                if pet_action(pet) != 0:
                     list.remove(pet)
         elif action == "list":
             for pet in list:
-                print("\t" + pet.name)
+                print("\t" + pet.name + " (" + pet.type + ")" + "\n")
+            if not list:
+                print("No pets available.")
         elif action == "exit":
             break
 
 
 if __name__ == '__main__':
-    pets = []  # in case you want some default pets, add them here
+    pets = [Pet("Xavier", "Slave")]  # in case you want some default pets, add them here
     print("##### Welcome to pet simulator! #####\n")
     start(pets)
+    print("\n##### Goodbye! #####")
