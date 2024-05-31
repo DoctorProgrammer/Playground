@@ -25,7 +25,7 @@ def fillSudoku(field):
                (1544, 1900),
                (1685, 1900),
                (1844, 1900),
-               (1989, 1900),]
+               (1989, 1900), ]
     sudokuColumnXCoodinates = [759, 913, 1059, 1219, 1377, 1530, 1693, 1838, 1996]
     sudokuRowYCoodinates = [442, 598, 742, 911, 1059, 1211, 1370, 1524, 1679]
 
@@ -71,6 +71,15 @@ def isValid(list, row, col, num):
     return True
 
 
+def askSudoku(list):
+    string: str = input(
+        "Enter the Sudoku: ")
+    for i in range(9):
+        for j in range(9):
+            list[i][j] = int(string[i * 9 + j])
+    return list
+
+
 if __name__ == '__main__':
     sudoku = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -81,6 +90,8 @@ if __name__ == '__main__':
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+    sudoku = askSudoku(sudoku)
 
     printInConsole(sudoku)
 
